@@ -33,7 +33,7 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
     
     console.log("Connection 1");
-        socket.emit('hola');
+        io.emit('hola');
         io.to(socket.id).emit('conn');
     //When host connects for the first time
     socket.on('host-join', (data) =>{
@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
         var oldHostId = data.id;  
         var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
-        socket.emit('hola');
+        io.emit('hola');
         io.to(socket.id).emit('conn');
         console.log("enviado");
     });
