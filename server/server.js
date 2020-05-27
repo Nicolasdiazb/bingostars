@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
     socket.on('host-join-game', (data) => {
         var oldHostId = data.id;  
        // var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
-        console.log(data+" id encontrado, id generado... ");
+        console.log(data+" id encontrado, id generado... "+socket.id);
         io.to(socket.id).emit('hola');
         var game = games.getGame(oldHostId);//Gets game with old host id
         if(game){
