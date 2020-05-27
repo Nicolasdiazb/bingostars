@@ -33,6 +33,8 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
     
     console.log("Connection 1");
+        socket.emit('hola');
+        io.to(socket.id).emit('conn');
     //When host connects for the first time
     socket.on('host-join', (data) =>{
         console.log("Connection 2");
