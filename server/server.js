@@ -72,6 +72,7 @@ io.on('connection', (socket) => {
     //When the host connects from the game view
     socket.on('host-join-game', (data) => {
         var oldHostId = data.id;
+        console.log(data.id+" id encontrado");
         var game = games.getGame(oldHostId);//Gets game with old host id
         if(game){
             game.hostId = socket.id;//Changes the game host id to new host id
