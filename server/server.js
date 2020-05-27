@@ -32,9 +32,10 @@ server.listen(3000, () => {
 //When a connection to server is made from client
 io.on('connection', (socket) => {
     
+    console.log("Connection 1");
     //When host connects for the first time
     socket.on('host-join', (data) =>{
-        
+        console.log("Connection 2");
         //Check to see if id passed in url corresponds to id of kahoot game in database
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
