@@ -74,54 +74,8 @@ io.on('connection', (socket) => {
         var oldHostId = data.id;  
         var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
-        socket.emit('hola');
-        io.to(socket.id).emit('connect');
+        io.to(socket.id).emit('hola');
         console.log("enviado");
-        var game = games.getGame(oldHostId);//Gets game with old host id
-        if(game){
-            game.hostId = socket.id;//Changes the game host id to new host id
-            socket.join(game.pin);
-            var playerData = players.getPlayers(oldHostId);//Gets player in game
-            for(var i = 0; i < Object.keys(players.players).length; i++){
-                if(players.players[i].hostId == oldHostId){
-                    players.players[i].hostId = socket.id;
-                }
-            }
-            var gameid = game.gameData['gameid'];
-            MongoClient.connect(url, function(err, db){
-                if (err) throw err;
-    
-                var dbo = db.db('kahootDB');
-                var query = { id:  parseInt(gameid)};
-                dbo.collection("kahootGames").find(query).toArray(function(err, res) {
-                    if (err) throw err;
-                    
-                    var question = res[0].questions[0].question;
-                    var answer1 = res[0].questions[0].answers[0];
-                    var answer2 = res[0].questions[0].answers[1];
-                    var answer3 = res[0].questions[0].answers[2];
-                    var answer4 = res[0].questions[0].answers[3];
-                    var correctAnswer = res[0].questions[0].correct;
-                    
-                    socket.emit('gameQuestions', {
-                        q1: question,
-                        a1: answer1,
-                        a2: answer2,
-                        a3: answer3,
-                        a4: answer4,
-                        correct: correctAnswer,
-                        playersInGame: playerData.length
-                    });
-                    db.close();
-                });
-            });
-            
-            
-            io.to(game.pin).emit('gameStartedPlayer');
-            game.gameData.questionLive = true;
-        }else{
-            socket.emit('noGameFound');//No game was found, redirect user
-        }
     });
     
     //When player connects for the first time
