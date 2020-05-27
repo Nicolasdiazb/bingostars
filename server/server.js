@@ -74,6 +74,7 @@ io.on('connection', (socket) => {
         var oldHostId = data.id;  
         var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
+        socket.emit('conn');
         io.to(socket.id).emit('hola');
         console.log("enviado");
     });
