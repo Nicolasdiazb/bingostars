@@ -81,7 +81,6 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('conn');
         console.log("enviado");
     });
-    
     //When player connects for the first time
     socket.on('player-join', (params) => {
         
