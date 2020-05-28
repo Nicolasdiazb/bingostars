@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
         console.log("enviado");
     });
     //When the host connects from the game view
-    socket.on('test', (data) => {
+    socket.on('test', (params) => {
         console.log("test");
     });
     //When player connects for the first time
