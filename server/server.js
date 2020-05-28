@@ -116,6 +116,7 @@ io.on('connection', (socket) => {
         
         //If the game has not been found
         if(gameFound == false){
+                console.log('no encontro lobby');
             socket.emit('noGameFound'); //Player is sent back to 'join' page because game was not found with pin
         }
         
