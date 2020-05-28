@@ -87,9 +87,7 @@ io.on('connection', (socket) => {
     });
     //When player connects for the first time
     socket.on('player-join', (params) => {
-        
-        var obj = JSON.parse(params);
-                console.log('entra '+params +' '+params.name+' +params.pin+' '+obj);
+                console.log('entra '+params.data +' '+params.name+' +params.pin+' '+obj);
         var gameFound = false; //If a game is found with pin provided by player
         
         //For each game in the Games class
