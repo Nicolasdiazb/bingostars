@@ -84,6 +84,7 @@ io.on('connection', (socket) => {
     //When player connects for the first time
     socket.on('player-join', (params) => {
         
+                console.log('entra');
         var gameFound = false; //If a game is found with pin provided by player
         
         //For each game in the Games class
@@ -104,6 +105,9 @@ io.on('connection', (socket) => {
                 
                 io.to(params.pin).emit('updatePlayerLobby', playersInGame);//Sending host player data to display
                 gameFound = true; //Game has been found
+            }else{
+                
+                console.log('no encontro lobby');
             }
         }
         
