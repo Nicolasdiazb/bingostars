@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
                 
                 var playersInGame = players.getPlayers(hostId); 
                 console.log('Players connected '+playersInGame.playerId);
-                io.to(params.pin).emit('updateLobby', playersInGame);//Sending host player data to display
+                io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
                 gameFound = true; //Game has been found
             }else{
                 
