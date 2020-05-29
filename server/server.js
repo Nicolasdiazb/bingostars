@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
                 socket.join(params.pin); //Player is joining room based on pin
                 
                 var playersInGame = players.getPlayers(hostId); 
-                console.log('Players connected '+playersInGame.playerId);
+                console.log('Players connected '+playersInGame[0]);
                 io.to(params.pin).emit('playerJoinGame', playersInGame);//Sending players data to display
                 io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
                 gameFound = true; //Game has been found
