@@ -170,7 +170,7 @@ io.on('connection', (socket) => {
                             //io.to(hostId).emit('newBallot', playersInGame);//Sending host a ballot
                        }else
                        {                          
-                            //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
+                            console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
                     }
                 }
