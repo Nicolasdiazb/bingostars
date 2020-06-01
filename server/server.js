@@ -140,7 +140,7 @@ io.on('connection', (socket) => {
                 hostId = games.games[i].hostId; //Get the id of host of game
                 paramsPin = params.pin;
                 playersInGame = players.getPlayers(hostId); 
-                //io.to(params.pin).emit('playerJoinGame', playersInGame);//Sending players data to display
+                io.to(params.pin).emit('gameStarted', playersInGame);//Sending players data to display
                 //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
                 gameFound = true; //Game has been found
             }
