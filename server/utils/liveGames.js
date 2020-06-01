@@ -3,7 +3,7 @@ class LiveGames {
         this.games = [];
     }
     addGame(pin, hostId, boardLenght){
-        ballots = new Array(boardLenght);
+        var ballots = new Array(boardLenght);
         Activeballots = new Array(boardLenght);
         for (var i = 0; i < boardLenght; i++) 
         {
