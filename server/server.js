@@ -156,7 +156,7 @@ io.on('connection', (socket) => {
                 var bLenght = games.games[gamePos].boardLenght;
                 var ballotFound = new Boolean(false);
                 console.log('params '+gamePos+bLenght+ ballotFound);
-                while (!ballotFound) {
+                while (ballotFound==false) {
                 console.log('entra en while ');
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
