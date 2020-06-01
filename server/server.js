@@ -161,7 +161,7 @@ io.on('connection', (socket) => {
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
                     for (var i = 0; i < bLenght; i++) {
-                       if(games.games[gamePos].activeBallots[randNum]==0)
+                       if(games.games[gamePos].activeBallots[randNum]==0&&randNum!=0)
                        {                           
                             console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
                             games.games[gamePos].activeBallots[randNum] = 1;
