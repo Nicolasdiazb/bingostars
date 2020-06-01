@@ -166,8 +166,8 @@ io.on('connection', (socket) => {
                             console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
                             games.games[gamePos].activeBallots[randNum] = 1;
                             ballotFound = true;
-                            //io.to(paramsPin).emit('newBallot', playersInGame);//Sending players a ballot
-                            //io.to(hostId).emit('newBallot', playersInGame);//Sending host a ballot
+                            io.to(paramsPin).emit('newBallot', playersInGame);//Sending players a ballot
+                            io.to(hostId).emit('newBallot', playersInGame);//Sending host a ballot
                        }else
                        {                          
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
