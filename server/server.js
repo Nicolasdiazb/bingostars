@@ -152,8 +152,10 @@ io.on('connection', (socket) => {
             var intervalID = setInterval(SetBallot, 3000);
 
             function SetBallot() {
+                console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
                 var ballotFound = new Boolean(false);
+                console.log('params '+bLenght+ ballotFound);
                 while (!ballotFound) {
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
