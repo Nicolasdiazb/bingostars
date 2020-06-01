@@ -155,7 +155,7 @@ io.on('connection', (socket) => {
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
                 var ballotFound = new Boolean(false);
-                console.log('params '+bLenght+ ballotFound);
+                console.log('params '+gamePos+bLenght+ ballotFound);
                 while (!ballotFound) {
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
