@@ -9,7 +9,7 @@ class LiveGames {
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots};
         this.games.push(game);
         return game;
     }
