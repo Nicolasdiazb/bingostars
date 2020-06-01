@@ -167,12 +167,8 @@ io.on('connection', (socket) => {
                             games.games[gamePos].activeBallots[randNum] = 1;
                             ballotFound = true;
                             io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
-                            for(var i = 0; i < games.games.length; i++){
-                                //If the pin is equal to one of the game's pin
-                                if(paramsPin == games.games[i].pin){
-                                    io.to(paramsPin).emit('newBallot', randNum);//Sending players a ballot                                    
-                                }
-
+                            for(var i = 0; i < playersInGame.length; i++){
+                                io.to(playersInGame[i].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
                             }
                        }else
                        {                          
