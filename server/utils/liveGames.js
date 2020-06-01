@@ -2,8 +2,14 @@ class LiveGames {
     constructor () {
         this.games = [];
     }
-    addGame(pin, hostId){
-        var game = {pin, hostId};
+    addGame(pin, hostId, boardLenght){
+        ballots = new Array(boardLenght);
+        Activeballots = new Array(boardLenght);
+        for (var i = 0; i < boardLenght; i++) 
+        {
+            activeBallots[i] = 0;
+        }
+        var game = {pin, hostId, ballots};
         this.games.push(game);
         return game;
     }
