@@ -149,7 +149,7 @@ io.on('connection', (socket) => {
         if(gameFound){
                         
             // Will execute myCallback every 0.5 seconds 
-            var intervalID = window.setInterval(SetBallot, 3000);
+            var intervalID = setInterval(SetBallot, 3000);
 
             function SetBallot() {
                 var bLenght = games.games[gamePos].boardLenght;
