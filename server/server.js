@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
         var oldHostId = data.id;  
         var gamepin2 = Math.floor(Math.random()*90000) + 10000; //new pin for game
         console.log(data+" id encontrado, id generado... "+gamepin2+" socket id: "+socket.id);
-        games.addGame(gamepin2,socket.id,5);
+        games.addGame(gamepin2,socket.id,76);
         io.to(socket.id).emit('hola',{n: gamepin2 });
         io.to(socket.id).emit('conn');
         console.log("enviado");
@@ -119,6 +119,56 @@ io.on('connection', (socket) => {
         if(gameFound == false){
                 console.log('no encontro lobby');
             socket.emit('noGameFound'); //Player is sent back to 'join' page because game was not found with pin
+        }
+        
+        
+    });
+    
+    socket.on('host-start-bingo-game', (params) => {
+        var gameFound = false; //If a game is found with pin provided by player
+        var gamePos;
+        var hostId;
+        var playersInGame;
+        var paramsPin;
+        //For each game in the Games class
+        for(var i = 0; i < games.games.length; i++){
+            //If the pin is equal to one of the game's pin
+            if(params.pin == games.games[i].pin){
+                gamePos = i;
+                console.log('Host Start Game');
+                
+                hostId = games.games[i].hostId; //Get the id of host of game
+                paramsPin = params.pin;
+                playersInGame = players.getPlayers(hostId); 
+                //io.to(params.pin).emit('playerJoinGame', playersInGame);//Sending players data to display
+                //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
+                gameFound = true; //Game has been found
+            }
+            
+        }
+        if(gameFound){
+                        
+            // Will execute myCallback every 0.5 seconds 
+            var intervalID = window.setInterval(SetBallot, 3000);
+
+            function SetBallot() {
+                var bLenght = games.games[gamePos].boardLenght;
+                var ballotFound = new Boolean(false);
+                while (!ballotFound) {
+                // code block to be executed
+                var randNum = Math.floor(Math.random() * bLenght);
+                    for (var i = 0; i < bLenght; i++) {
+                       if(games.games[gamePos].activeBallots[randNum]==0)
+                       {                           
+                            console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
+                            games.games[gamePos].activeBallots[randNum] = 1;
+                            ballotFound = true;
+                            //io.to(paramsPin).emit('newBallot', playersInGame);//Sending players a ballot
+                            //io.to(hostId).emit('newBallot', playersInGame);//Sending host a ballot
+                       }
+                    }
+                }
+            }
         }
         
         
