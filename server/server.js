@@ -151,7 +151,8 @@ io.on('connection', (socket) => {
                         
             // Will execute myCallback every 0.5 seconds 
             var intervalID = setInterval(SetBallot, 3000);
-
+            games.games[gamePos].intervalIdCB = intervalID;
+            
             function SetBallot() {
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
@@ -167,7 +168,7 @@ io.on('connection', (socket) => {
                             console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
                             games.games[gamePos].activeBallots[randNum] = 1;
                             ballotFound = true;
-                            io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
+                            //io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
                             for(var i = 0; i < playersInGame.length; i++){
                                 io.to(playersInGame[i].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
                             }
@@ -191,11 +192,37 @@ io.on('connection', (socket) => {
         var paramsPin;
         var boardNumbers = new Array(params.Items);
         var player = players.getPlayer(socket.id);
+        var errorOnBoard = new Boolean(false);
         console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght+player.hostId);
         var game = games.getGame(player.hostId); //Gets the game data
+        playersInGame = players.getPlayers(player.hostId);
         for(var i = 0; i < 25; i++)
         {
-            console.log('primer numero '+params.Items[i]);            
+            if(game.activeBallots[params.Items[i]]==0)
+            {
+                errorOnBoard = true;   
+            }            
+        }
+        if(!errorOnBoard)
+        {     
+            clearInterval(game.intervalIdCB);
+            console.log('No hay error');            
+            for(var i = 0; i < playersInGame.length; i++)
+            {
+                if(playersInGame[i].playerId!=socket.id)
+                {
+                    io.to(playersInGame[i].playerId).emit('a-player-win', player.nameId);//Tell players someopne win                                    
+                }
+            }
+            io.to(socket.id).emit('ballots-check-Successful', 0);//Sending player win   
+        }else
+        {                   
+            for(var i = 0; i < playersInGame.length; i++)
+            {
+                io.to(playersInGame[i].playerId).emit('a-player-checking-failed', player.nameId);//Tell players someopne fail                                    
+            }
+            //io.to(socket.id).emit('ballots-check-error', 0);//Sending player fail   
+            console.log('Si hay error');         
         }
     });
     //When the player connects from game view
