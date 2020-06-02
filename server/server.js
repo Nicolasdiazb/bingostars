@@ -185,10 +185,10 @@ io.on('connection', (socket) => {
                                if(t>=bLenght-1&&ballotsCounter==false)
                                {
                                    noBallotsLeft = true;
-                                   console.log('esta mierda no funciona ');
+                                   console.log('no hay mas balotas');
                                }
                            }
-                            //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
+                            //console.log('no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
                     }
                 }
