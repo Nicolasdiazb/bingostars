@@ -190,7 +190,7 @@ io.on('connection', (socket) => {
         var paramsPin;
         //var player = players.getPlayer(socket.id);
         //var game = games.getGame(player.hostId); //Gets the game data
-        console.log('primer numero '+params.boardNumbers);
+        console.log('primer numero '+params.boardNumbers[0]);
     });
     //When the player connects from game view
     socket.on('player-join-game', (data) => {
