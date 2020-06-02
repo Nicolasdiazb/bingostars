@@ -193,8 +193,11 @@ io.on('connection', (socket) => {
             //If the pin is equal to one of the game's pin
             if(params.pin == games.games[i].pin){
                 gamePos = i;
-                console.log('Host Start Game');
-                
+                console.log('Analisying...');
+                for(var i = 0; i < params.bingoNumbers.length; i++)
+                {
+                       
+                }
                 hostId = games.games[i].hostId; //Get the id of host of game
                 paramsPin = params.pin;
                 playersInGame = players.getPlayers(hostId); 
