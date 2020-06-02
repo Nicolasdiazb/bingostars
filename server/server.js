@@ -189,8 +189,12 @@ io.on('connection', (socket) => {
         var playersInGame;
         var paramsPin;
         //var player = players.getPlayer(socket.id);
+        console.log('enviado desde '+ socket.id);
         //var game = games.getGame(player.hostId); //Gets the game data
-        console.log('primer numero '+params.Items[0]);
+        for(var i = 0; i < params,items.lenght; i++)
+        {
+            console.log('primer numero '+params.Items[i]);            
+        }
     });
     //When the player connects from game view
     socket.on('player-join-game', (data) => {
