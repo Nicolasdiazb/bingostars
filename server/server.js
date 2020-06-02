@@ -188,12 +188,13 @@ io.on('connection', (socket) => {
         var hostId;
         var playersInGame;
         var paramsPin;
+        var boardNumbers = new Array(params.Items);
         //var player = players.getPlayer(socket.id);
-        console.log('enviado desde '+ socket.id+' items lenght '+params.Items.lenght);
+        console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght);
         //var game = games.getGame(player.hostId); //Gets the game data
-        for(var i = 0; i < params.Items.lenght; i++)
+        for(var i = 0; i < boardNumbers.lenght; i++)
         {
-            console.log('primer numero '+params.Items[i]);            
+            console.log('primer numero '+boardNumbers[i]);            
         }
     });
     //When the player connects from game view
