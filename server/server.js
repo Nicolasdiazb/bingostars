@@ -220,9 +220,10 @@ io.on('connection', (socket) => {
                 console.log('la balota: '+params.Items[i]+' no ha salido');    
             }            
         }
-        if(errorsCounter>0){
+        if(errorsCounter<=0){
             errorOnBoard = false;
         }
+        console.log('tiene '+errorsCounter+' errores');
         if(!errorOnBoard)
         {     
             console.log('lo logro '+game.intervalIdCB);
