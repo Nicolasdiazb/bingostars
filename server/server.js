@@ -190,7 +190,7 @@ io.on('connection', (socket) => {
         var paramsPin;
         var boardNumbers = new Array(params.Items);
         var player = players.getPlayer(socket.id);
-        console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght+player);
+        console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght+player.hostId);
         var game = games.getGame(player.hostId); //Gets the game data
         for(var i = 0; i < 25; i++)
         {
