@@ -194,7 +194,7 @@ io.on('connection', (socket) => {
         //var game = games.getGame(player.hostId); //Gets the game data
         for(var i = 0; i < 75; i++)
         {
-            console.log('primer numero '+boardNumbers[i]);            
+            console.log('primer numero '+params.Items[i]);            
         }
     });
     //When the player connects from game view
