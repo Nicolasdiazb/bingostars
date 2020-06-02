@@ -130,6 +130,7 @@ io.on('connection', (socket) => {
         var hostId;
         var playersInGame;
         var paramsPin;
+        var noBallotsLeft = new Boolean(false);
         players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
         //For each game in the Games class
         for(var i = 0; i < games.games.length; i++){
@@ -153,13 +154,12 @@ io.on('connection', (socket) => {
             var intervalID = setInterval(SetBallot, 3000);
             games.games[gamePos].intervalIdCB = intervalID;
             
-            var noBallotsLeft = new Boolean(false);
-            var ballotFound = new Boolean(false);
             function SetBallot() {
+            var ballotFound = new Boolean(false);
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
                 console.log('params '+gamePos+bLenght+ ballotFound);
-                while (ballotFound==false) {
+                while (ballotFound==false&&noBallotsLeft==false) {
                 console.log('entra en while ');
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
@@ -175,7 +175,19 @@ io.on('connection', (socket) => {
                             }
                        }else
                        {        
-                           
+                           var ballotsCounter = new Boolean(false);
+                           for (var t = 0; t < bLenght; t++) 
+                           {
+                                if(games.games[gamePos].activeBallots[t]==1)
+                                {
+                                    ballotsCounter = true;
+                                }
+                               if(t>=bLenght-1&&ballotsCounter==false)
+                               {
+                                   noBallotsLeft = true;
+                                   console.log('esta mierda no funciona ');
+                               }
+                           }
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
                     }
