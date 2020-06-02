@@ -125,6 +125,8 @@ io.on('connection', (socket) => {
     });
     
     socket.on('host-start-bingo-game', (params) => {
+        var ballotFound = new Boolean(false);
+        var noBallotsLeft = new Boolean(false);
         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
         var hostId;
@@ -156,8 +158,6 @@ io.on('connection', (socket) => {
             function SetBallot() {
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
-                var ballotFound = new Boolean(false);
-                var noBallotsLeft = new Boolean(false);
                 console.log('params '+gamePos+bLenght+ ballotFound);
                 while (ballotFound==false&&noBallotsLeft ==false ) {
                 console.log('entra en while ');
@@ -170,14 +170,23 @@ io.on('connection', (socket) => {
                             games.games[gamePos].activeBallots[randNum] = 1;
                             ballotFound = true;
                             //io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
-                            for(var i = 0; i < playersInGame.length; i++){
-                                io.to(playersInGame[i].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
+                            for(var n = 0; n < playersInGame.length; n++){
+                                io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
                             }
                        }else
                        {        
-                           if(i>=bLenght-1){
+                           var ballotsCounter = new Boolean(false);
+                           for (var t = 0; t < bLenght; t++) 
+                           {
+                                if(games.games[gamePos].activeBallots[t]==1)
+                                {
+                                    ballotsCounter = true;
+                                }
+                               if(t>=bLenght-1&&ballotsCounter==false)
+                               {
                                    noBallotsLeft = true;
                                    console.log('esta mierda no funciona ');
+                               }
                            }
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
@@ -206,6 +215,7 @@ io.on('connection', (socket) => {
             if(game.activeBallots[params.Items[i]]==0)
             {
                 errorOnBoard = true;   
+                console.log('la balota: '+params.Items[i]+' no ha salido');    
             }            
         }
         if(!errorOnBoard)
