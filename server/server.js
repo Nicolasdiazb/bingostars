@@ -125,7 +125,6 @@ io.on('connection', (socket) => {
     });
     
     socket.on('host-start-bingo-game', (params) => {
-        var ballotFound = new Boolean(false);
         var noBallotsLeft = new Boolean(false);
         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
@@ -155,6 +154,7 @@ io.on('connection', (socket) => {
             var intervalID = setInterval(SetBallot, 3000);
             games.games[gamePos].intervalIdCB = intervalID;
             
+            var ballotFound = new Boolean(false);
             function SetBallot() {
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
