@@ -176,7 +176,7 @@ io.on('connection', (socket) => {
                        }else
                        {        
                            var ballotsCounter = new Boolean(false);
-                           for (var t = 0; t < bLenght; t++) 
+                           for (var t = 1; t < bLenght; t++) 
                            {
                                 if(games.games[gamePos].activeBallots[t]==0)
                                 {
