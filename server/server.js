@@ -178,14 +178,10 @@ io.on('connection', (socket) => {
                            var ballotsCounter = new Boolean(false);
                            for (var t = 0; t < bLenght; t++) 
                            {
-                                if(games.games[gamePos].activeBallots[t]==1)
+                                if(games.games[gamePos].activeBallots[t]==0)
                                 {
                                     ballotsCounter = true;
                                 }
-                               if(t>=bLenght-1)
-                               {
-                                   console.log('entra en lengh');
-                               }
                                if(t>=bLenght-1&&ballotsCounter==false)
                                {
                                    noBallotsLeft = true;
