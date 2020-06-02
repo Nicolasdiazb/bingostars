@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
                 var ballotFound = new Boolean(false);
                 console.log('params '+gamePos+bLenght+ ballotFound);
                 while (ballotFound==false) {
-                console.log('entra en while ');
+                //console.log('entra en while ');
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
                     for (var i = 0; i < bLenght; i++) {
@@ -205,6 +205,7 @@ io.on('connection', (socket) => {
         }
         if(!errorOnBoard)
         {     
+            console.log('lo logro '+game.intervalIdCB);
             clearInterval(game.intervalIdCB);
             console.log('No hay error');            
             for(var i = 0; i < playersInGame.length; i++)
@@ -216,7 +217,7 @@ io.on('connection', (socket) => {
             }
             io.to(socket.id).emit('ballots-check-Successful', 0);//Sending player win   
         }else
-        {                   
+        {   
             for(var i = 0; i < playersInGame.length; i++)
             {
                 io.to(playersInGame[i].playerId).emit('a-player-checking-failed', player.nameId);//Tell players someopne fail                                    
