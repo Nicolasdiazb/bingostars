@@ -175,19 +175,7 @@ io.on('connection', (socket) => {
                             }
                        }else
                        {        
-                           var ballotsCounter = new Boolean(false);
-                           for (var t = 0; t < bLenght; t++) 
-                           {
-                                if(games.games[gamePos].activeBallots[t]==1)
-                                {
-                                    ballotsCounter = true;
-                                }
-                               if(t>=bLenght-1&&ballotsCounter==false)
-                               {
-                                   noBallotsLeft = true;
-                                   console.log('esta mierda no funciona ');
-                               }
-                           }
+                           
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
                     }
