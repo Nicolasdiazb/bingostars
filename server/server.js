@@ -157,8 +157,9 @@ io.on('connection', (socket) => {
                 console.log('set ballot ');
                 var bLenght = games.games[gamePos].boardLenght;
                 var ballotFound = new Boolean(false);
+                var noBallotsLeft = new Boolean(false);
                 console.log('params '+gamePos+bLenght+ ballotFound);
-                while (ballotFound==false) {
+                while (ballotFound==false||noBallotsLeft ==false ) {
                 //console.log('entra en while ');
                 // code block to be executed
                 var randNum = Math.floor(Math.random() * bLenght);
@@ -173,7 +174,10 @@ io.on('connection', (socket) => {
                                 io.to(playersInGame[i].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
                             }
                        }else
-                       {                          
+                       {        
+                           if(i>=bLenght){
+                                   noBallotsLeft = true;
+                           }
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
                     }
