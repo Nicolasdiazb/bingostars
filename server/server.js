@@ -175,8 +175,9 @@ io.on('connection', (socket) => {
                             }
                        }else
                        {        
-                           if(i>=bLenght){
+                           if(i>=bLenght-1){
                                    noBallotsLeft = true;
+                                   console.log('esta mierda no funciona ');
                            }
                             //console.log('esta mierda no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
                        }
