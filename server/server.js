@@ -192,7 +192,7 @@ io.on('connection', (socket) => {
         //var player = players.getPlayer(socket.id);
         console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght);
         //var game = games.getGame(player.hostId); //Gets the game data
-        for(var i = 0; i < boardNumbers.lenght; i++)
+        for(var i = 0; i < 75; i++)
         {
             console.log('primer numero '+boardNumbers[i]);            
         }
