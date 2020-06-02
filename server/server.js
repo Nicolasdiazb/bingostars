@@ -130,6 +130,7 @@ io.on('connection', (socket) => {
         var hostId;
         var playersInGame;
         var paramsPin;
+        players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
         //For each game in the Games class
         for(var i = 0; i < games.games.length; i++){
             //If the pin is equal to one of the game's pin
