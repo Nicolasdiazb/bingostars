@@ -5,11 +5,12 @@ class LiveGames {
     addGame(pin, hostId, boardLenght){
         var ballots = new Array(boardLenght);
         var activeBallots = new Array(boardLenght);
+        var active = 1;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght, activeBallots, ballots};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots, active};
         this.games.push(game);
         return game;
     }
