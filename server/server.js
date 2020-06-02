@@ -210,13 +210,18 @@ io.on('connection', (socket) => {
         console.log('enviado desde '+ socket.id+' items lenght '+boardNumbers.lenght+player.hostId);
         var game = games.getGame(player.hostId); //Gets the game data
         playersInGame = players.getPlayers(player.hostId);
+        var errorsCounter = 0;
         for(var i = 0; i < 25; i++)
         {
             if(game.activeBallots[params.Items[i]]==0)
             {
+                errorsCounter +=1;
                 errorOnBoard = true;   
                 console.log('la balota: '+params.Items[i]+' no ha salido');    
             }            
+        }
+        if(errorsCounter>0){
+            errorOnBoard = false;
         }
         if(!errorOnBoard)
         {     
