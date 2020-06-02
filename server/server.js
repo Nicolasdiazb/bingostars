@@ -182,6 +182,29 @@ io.on('connection', (socket) => {
         
     });
     
+    socket.on('player-attempt-to-win', (params) => {
+        var gameFound = false; //If a game is found with pin provided by player
+        var gamePos;
+        var hostId;
+        var playersInGame;
+        var paramsPin;
+        //For each game in the Games class
+        for(var i = 0; i < games.games.length; i++){
+            //If the pin is equal to one of the game's pin
+            if(params.pin == games.games[i].pin){
+                gamePos = i;
+                console.log('Host Start Game');
+                
+                hostId = games.games[i].hostId; //Get the id of host of game
+                paramsPin = params.pin;
+                playersInGame = players.getPlayers(hostId); 
+                //io.to(params.pin).emit('gameStarted', playersInGame);//Sending players data to display
+                //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
+                gameFound = true; //Game has been found
+            }
+            
+        }
+    });
     //When the player connects from game view
     socket.on('player-join-game', (data) => {
         var player = players.getPlayer(data.id);
