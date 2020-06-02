@@ -182,6 +182,10 @@ io.on('connection', (socket) => {
                                 {
                                     ballotsCounter = true;
                                 }
+                               if(t>=bLenght-1)
+                               {
+                                   console.log('entra en lengh');
+                               }
                                if(t>=bLenght-1&&ballotsCounter==false)
                                {
                                    noBallotsLeft = true;
