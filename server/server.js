@@ -198,6 +198,15 @@ io.on('connection', (socket) => {
         
     });
     
+    socket.on('player-send-emoji', (params) => {
+        var player = players.getPlayer(socket.id);        
+        var game = games.getGame(player.hostId); //Gets the game data
+        var playersInGame = players.getPlayers(player.hostId);
+            for(var n = 0; n < playersInGame.length; n++)
+            {
+                io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
+            }
+    });
     socket.on('player-attempt-to-win', (params) => {
         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
