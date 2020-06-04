@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     
     console.log("Connection " + socket.id);
         io.emit('hola');
-        io.to(socket.id).emit('conn');
+        io.to(socket.id).emit('conn', 0);
     //When host connects for the first time
     socket.on('host-join', (data) =>{
         console.log("Connection 2");
