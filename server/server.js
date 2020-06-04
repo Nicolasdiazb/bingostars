@@ -32,7 +32,7 @@ server.listen(3000, () => {
 //When a connection to server is made from client
 io.on('connection', (socket) => {
     
-    console.log("Connection 1");
+    console.log("Connection " + socket.id);
         io.emit('hola');
         io.to(socket.id).emit('conn');
     //When host connects for the first time
