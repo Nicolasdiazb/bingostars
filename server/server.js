@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
         console.log("enviado");
     });
     socket.on('updatePlayerSocketId', (params) => {
-        console.log("player cambio su Id");
+        console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id);
         var player = players.getPlayer(params.oldId);
         player.id = socket.id;
     });
