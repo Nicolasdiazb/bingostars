@@ -87,7 +87,7 @@ io.on('connection', (socket) => {
         player.id = params;
     });
     //When the host connects from the game view
-    socket.on('test', (params) => {
+    socket.on('test', (data) => {
         console.log("test");
     });
     //When player connects for the first time
