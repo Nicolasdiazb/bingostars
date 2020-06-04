@@ -84,7 +84,10 @@ io.on('connection', (socket) => {
     socket.on('updatePlayerSocketId', (params) => {
         console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id);
         var player = players.getPlayer(params.oldId);
-        players.updatePlayerId(socket.id, params.oldId);
+        players.updatePlayerId(socket.id, params.oldId);       
+        var game = games.getGame(player.hostId); //Gets the game data
+        var playersInGame = players.getPlayers(player.hostId);
+        io.to(player.playerId).emit('refreshBallots', game.activeBallots);//Sending player all ballots                                     
     });
     //When the host connects from the game view
     socket.on('test', (data) => {
