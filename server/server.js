@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
         var game = games.getGame(player.hostId); //Gets the game data
         var playersInGame = players.getPlayers(player.hostId);
         io.to(player.playerId).emit('refreshBallots', game.activeBallots);//Sending player all ballots 
-        var sockets = {params.oldId, socket.id};
+        var sockets = new Array(params.oldId, socket.id);
          for(var n = 0; n < playersInGame.length; n++){
                 io.to(playersInGame[n].playerId).emit('updatePlayerId', sockets);//Sending players old and new sockets                                     
             }
