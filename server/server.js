@@ -132,7 +132,7 @@ io.on('connection', (socket) => {
         
     });
     
-    socket.on('host-start-bingo-game', (params) => {
+    socket.on('host-start-bingo-game', (params) => {   
         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
         var hostId;
@@ -177,6 +177,7 @@ io.on('connection', (socket) => {
                             console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
                             games.games[gamePos].activeBallots[randNum] = 1;
                             ballotFound = true;
+                            io.to(hostId).emit('refreshBallots', game.activeBallots);//Sending player all ballots          
                             //io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
                             for(var n = 0; n < playersInGame.length; n++){
                                 io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
