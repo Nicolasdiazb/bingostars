@@ -81,10 +81,10 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('conn');
         console.log("enviado");
     });
-    socket.on('updatePlayerSocketId', (data) => {
+    socket.on('updatePlayerSocketId', (params) => {
         console.log("player cambio su Id");
-        var player = players.getPlayer(data);
-        player.id = params;
+        var player = players.getPlayer(params.oldId);
+        player.id = params.oldId;
     });
     //When the host connects from the game view
     socket.on('test', (data) => {
