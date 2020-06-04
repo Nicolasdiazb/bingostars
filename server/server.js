@@ -81,6 +81,11 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('conn');
         console.log("enviado");
     });
+    socket.on('updatePlayerSocketId', (data) => {
+        console.log("player cambio su Id");
+        var player = players.getPlayer(data);
+        player.id = data;
+    });
     //When the host connects from the game view
     socket.on('test', (params) => {
         console.log("test");
@@ -150,7 +155,7 @@ io.on('connection', (socket) => {
         }
         if(gameFound){
                         
-            // Will execute myCallback every 3 seconds 
+            // Will execute myCallback every 5 seconds 
             var intervalID = setInterval(SetBallot, 5000);
             games.games[gamePos].intervalIdCB = intervalID;
             
