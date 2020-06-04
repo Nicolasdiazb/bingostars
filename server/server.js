@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
     socket.on('updatePlayerSocketId', (params) => {
         console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id);
         var player = players.getPlayer(params.oldId);
-        player.id = socket.id;
+        players.updatePlayerId(socket.id, params.oldId);
     });
     //When the host connects from the game view
     socket.on('test', (data) => {
