@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
                 var hostId = games.games[i].hostId; //Get the id of host of game
                 
                 
-                players.addPlayer(hostId, socket.id, params.nameID); //add player to game
+                players.addPlayer(hostId, socket.id, params.nameID, params.profilePic); //add player to game
                 
                 socket.join(params.pin); //Player is joining room based on pin
                 
