@@ -70,6 +70,20 @@ io.on('connection', (socket) => {
         });
         
     });
+    //When player connects for the first time
+    socket.on('player-host-join', (params) => {
+        
+        //For each game in the Games class
+        for(var i = 0; i < games.games.length; i++){
+            //If the pin is equal to one of the game's pin
+            if(params.pin == games.games[i].pin){                
+                console.log('Player connected to game');                
+                var hostId = games.games[i].hostId; //Get the id of host of game              
+                players.addPlayer(hostId, socket.id, params.nameID, params.profilePic); //add player to game               
+               }
+        }       
+        
+    });
     
     //When the host connects from the game view
     socket.on('host-join-game', (data) => {
