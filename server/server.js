@@ -110,6 +110,11 @@ io.on('connection', (socket) => {
             console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id); 
         }
     });
+    socket.on('refreshingRequest', (params) => {
+        var player = players.getPlayer(socket.id);
+            var game = games.getGame(player.hostId); //Gets the game data
+         io.to(player.playerId).emit('refreshBallots', game.activeBallots);//Sending player all ballots 
+    });
     //When the host connects from the game view
     socket.on('test', (data) => {
         console.log("test");
@@ -213,7 +218,7 @@ io.on('connection', (socket) => {
                                 {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                                    io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
+                                    //io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
                                 }
                                 else
                                 {
