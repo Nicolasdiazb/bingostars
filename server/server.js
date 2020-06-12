@@ -153,6 +153,14 @@ io.on('connection', (socket) => {
         
     });
     
+    socket.on('playerEnterGame', (params) => {
+        var player = players.getPlayer(socket.id);
+        if(player)
+        {
+            player.onGame = true;
+        }
+    });
+    
     socket.on('host-start-bingo-game', (params) => {   
         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
@@ -201,6 +209,10 @@ io.on('connection', (socket) => {
                             //io.to(hostId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots          
                             //io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
                             for(var n = 0; n < playersInGame.length; n++){
+                                if(playersInGame[n].onGame ==false)
+                                {
+                                    io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                }
                                 io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
                             }
                        }else
