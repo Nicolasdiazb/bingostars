@@ -220,10 +220,8 @@ io.on('connection', (socket) => {
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                                     //io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
                                 }
-                                else
-                                {
                                     io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot  
-                                }
+                                
                             }
                        }else
                        {        
