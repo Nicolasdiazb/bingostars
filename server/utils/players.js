@@ -3,7 +3,8 @@ class Players {
         this.players = [];
     }
     addPlayer(hostId, playerId, nameId, profilePic){
-        var player = {hostId, playerId, nameId, profilePic};
+        var onGame = new Boolean(false);
+        var player = {hostId, playerId, nameId, profilePic, onGame};
         this.players.push(player);
         return player;
     }
