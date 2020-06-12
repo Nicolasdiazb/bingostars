@@ -212,9 +212,12 @@ io.on('connection', (socket) => {
                                 if(playersInGame[n].onGame ==false)
                                 {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
-                                 //   io.to(playersInGame[n].playerId).emit('gameStartedRefreshed', playersInGame);
+                                 //   io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                                 }
-                                io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
+                                else
+                                {
+                                    io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
+                                }
                             }
                        }else
                        {        
