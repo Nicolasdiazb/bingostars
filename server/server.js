@@ -162,6 +162,7 @@ io.on('connection', (socket) => {
         var player = players.getPlayer(socket.id);
         if(player)
         {
+            console.log("callback from: "+player.nameId)
             player.onGame = true;
         }
     });
