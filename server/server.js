@@ -213,10 +213,11 @@ io.on('connection', (socket) => {
                                 {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                    io.to(playersInGame[n].playerId).emit('refreshBallots', game.activeBallots);//Sending player all ballots 
                                 }
                                 else
                                 {
-                                    io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
+                                    io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot  
                                 }
                             }
                        }else
