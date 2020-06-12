@@ -211,6 +211,7 @@ io.on('connection', (socket) => {
                             for(var n = 0; n < playersInGame.length; n++){
                                 if(playersInGame[n].onGame ==false)
                                 {
+                                    console.log("player i outside");
                                     io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                                 }
                                 io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot                                     
