@@ -212,7 +212,7 @@ io.on('connection', (socket) => {
                                 if(playersInGame[n].onGame ==false)
                                 {
                                     console.log("player "+playersInGame[n].playerId+" i outside");
-                                 //   io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                    io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                                 }
                                 else
                                 {
