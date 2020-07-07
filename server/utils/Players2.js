@@ -1,4 +1,4 @@
-class Players {
+class Players2 {
     constructor () {
         this.players = [];
     }
