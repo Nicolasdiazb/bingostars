@@ -212,7 +212,7 @@ io.on('connection', (socket) => {
         //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
         //    }        
         var intervalID = setInterval(SetBallot, 10000);
-        games.games[gamePos].intervalIdCB = intervalID;
+        game.intervalIdCB = intervalID;
         
         function SetBallot() {
             console.log('new cicle');
