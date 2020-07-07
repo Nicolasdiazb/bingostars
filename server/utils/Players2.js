@@ -2,9 +2,9 @@ class Players {
     constructor () {
         this.players = [];
     }
-    addPlayer(hostId, playerId, nameId, profilePic){
+    addPlayer(hostId, playerId, nameId, profilePic, pos){
         var onGame = new Boolean(false);
-        var player = {hostId, playerId, nameId, profilePic, onGame};
+        var player = {hostId, playerId, nameId, profilePic, onGame, pos};
         this.players.push(player);
         return player;
     }
