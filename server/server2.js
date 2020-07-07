@@ -190,67 +190,9 @@ io.on('connection', (socket) => {
                 gameFound = true; //Game has been found
             }
             
-        }
-        if(gameFound){
-                        
-            // Will execute myCallback every 5 seconds 
-            var intervalID = setInterval(SetBallot, 9000);
-            games.games[gamePos].intervalIdCB = intervalID;
-            
-            function SetBallot() {
-            var ballotFound = new Boolean(false);
-                console.log('set ballot ');
-                var bLenght = games.games[gamePos].boardLenght;
-                console.log('params '+gamePos+bLenght+ ballotFound);
-                while (ballotFound==false&&noBallotsLeft==false) {
-                console.log('entra en while ');
-                // code block to be executed
-                var randNum = Math.floor(Math.random() * bLenght);
-                    for (var i = 0; i < bLenght; i++) {
-                       if(games.games[gamePos].activeBallots[randNum]==0&&randNum!=0)
-                       {                           
-                            console.log('Se Envió balota '+ randNum+' desde '+ paramsPin);
-                            games.games[gamePos].activeBallots[randNum] = 1;
-                            ballotFound = true;
-                            //io.to(hostId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots          
-                            //io.to(hostId).emit('newBallot', randNum);//Sending host a ballot 
-                            for(var n = 0; n < playersInGame.length; n++){
-                                if(playersInGame[n].onGame ==false)
-                                {
-                                    console.log("player "+playersInGame[n].playerId+" i outside");
-                                    io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                                    //io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
-                                }else
-                                {
-                                    io.to(playersInGame[n].playerId).emit('newBallot', randNum);//Sending players a ballot 
-                                }
-                                
-                            }
-                       }else
-                       {        
-                           var ballotsCounter = new Boolean(false);
-                           for (var t = 1; t < bLenght; t++) 
-                           {
-                                if(games.games[gamePos].activeBallots[t]==0)
-                                {
-                                    ballotsCounter = true;
-                                }
-                               if(t>=bLenght-1&&ballotsCounter==false)
-                               {
-                                   noBallotsLeft = true;
-                                   console.log('no hay mas balotas');
-                               }
-                           }
-                            //console.log('no funciona '+ randNum+' games '+ games.games[gamePos].activeBallots[randNum]);
-                       }
-                    }
-                }
-            }
-        }
-        
+        }       
         
     });
-    
     socket.on('player-send-emoji', (params) => {
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data
@@ -259,6 +201,21 @@ io.on('connection', (socket) => {
             {
                 io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
             }
+    });
+    socket.on('newTurn', (params) => {
+        var player = players.getPlayer(socket.id);        
+        var game = games.getGame(player.hostId); //Gets the game data
+        var playersInGame = players.getPlayers(player.hostId);
+        ///    for(var n = 0; n < playersInGame.length; n++)
+        //    {
+        //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
+        //    }        
+        var intervalID = setInterval(SetBallot, 10000);
+        games.games[gamePos].intervalIdCB = intervalID;
+        
+        function SetBallot() {
+            console.log('new cicle');
+        }
     });
     socket.on('player-attempt-to-win', (params) => {
         var gameFound = false; //If a game is found with pin provided by player
