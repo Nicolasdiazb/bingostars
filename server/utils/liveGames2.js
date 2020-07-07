@@ -7,11 +7,12 @@ class LiveGames {
         var activeBallots = new Array(boardLenght);
         var active = 1;
         var intervalIdCB;
+        var currPosToInit = 0;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit};
         this.games.push(game);
         return game;
     }
