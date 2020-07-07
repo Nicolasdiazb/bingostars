@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
                 if(result[0] !== undefined){
                     var gamePin = Math.floor(Math.random()*90000) + 10000; //new pin for game
 
-                    games.addGame(gamePin, socket.id, false, {playersAnswered: 0, questionLive: false, gameid: data.id, question: 1}); //Creates a game with pin and host id
+                    games.pGame(gamePin, socket.id, false, {playersAnswered: 0, questionLive: false, gameid: data.id, question: 1}); //Creates a game with pin and host id
 
                     var game = games.getGame(socket.id); //Gets the game data
 
@@ -79,7 +79,8 @@ io.on('connection', (socket) => {
             if(params.pin == games.games[i].pin){                
                 console.log('Player connected to game');                
                 var hostId = games.games[i].hostId; //Get the id of host of game              
-                players.addPlayer(hostId, socket.id, params.nameID, params.profilePic); //add player to game               
+                players.addPlayer(hostId, socket.id, params.nameID, params.profilePic,games.games[i].currPosToInit); //add player to game               
+                games.games[i].currPosToInit++;
                }
         }       
         
@@ -215,6 +216,10 @@ io.on('connection', (socket) => {
         
         function SetBallot() {
             console.log('new cicle');
+            for(var n = 0; n < playersInGame.length; n++)
+            {
+              console.log(playersInGame[n].pos);                                     
+            }
         }
     });
     socket.on('player-attempt-to-win', (params) => {
