@@ -1,4 +1,4 @@
-class LiveGames2 {
+class LiveGames {
     constructor () {
         this.games = [];
     }
