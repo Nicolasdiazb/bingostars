@@ -1,4 +1,4 @@
-class LiveGames {
+class LiveGames2 {
     constructor () {
         this.games = [];
     }
@@ -30,4 +30,3 @@ class LiveGames {
 }
 
 module.exports = {LiveGames};
-© 2020 GitHub, Inc.
