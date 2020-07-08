@@ -34,7 +34,6 @@ io.on('connection', (socket) => {
     
     console.log("Connection " + socket.id);
         io.emit('hola');
-        io.emit('diceRoll',0);
         io.to(socket.id).emit('conn', 0);
     //When host connects for the first time
     socket.on('host-join', (data) =>{
@@ -206,9 +205,13 @@ io.on('connection', (socket) => {
             }
     });
     socket.on('newTurn', (params) => {
+        if(typeof game.intervalIdCB !== "undefined"&&game.intervalIdCB){            
+            clearInterval(game.intervalIdCB);
+        }
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data
         var playersInGame = players.getPlayers(player.hostId);
+        var iterations = 0
         ///    for(var n = 0; n < playersInGame.length; n++)
         //    {
         //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
@@ -217,29 +220,50 @@ io.on('connection', (socket) => {
         game.intervalIdCB = intervalID;
         
         function SetBallot() {
-            var playerOnTurn = players.getPlayerByTurn(game.currTurn);
-            console.log('new cicle '+playersInGame.length);
-            for(var n = 0; n < playersInGame.length; n++)
-            {
-                io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
-                if(playersInGame[n].onGame ==false)
-                {
-                        console.log("player "+playersInGame[n].playerId+" i outside");
-                        io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                                    //io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
-                }
+            iterations++;
+            if(iterations<2){
+                   var playerOnTurn = players.getPlayerByTurn(game.currTurn);
+                   console.log('new cicle '+playersInGame.length);
+                   for(var n = 0; n < playersInGame.length; n++)
+                   {
+                        io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
+                        if(playersInGame[n].onGame ==false)
+                        {
+                               console.log("player "+playersInGame[n].playerId+" i outside");
+                               io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                        }
+                   }
+                   game.currTurn++;
+                   if(game.currTurn>=playersInGame.length){
+                   game.currTurn = 0;
+                   }
             }
-              game.currTurn++;
-               if(game.currTurn>=playersInGame.length){
-                    game.currTurn = 0;
-               }
+            else{
+                   clearInterval(game.intervalIdCB);
+                   for(var n = 0; n < playersInGame.length; n++)
+                   {
+                        io.to(playersInGame[n].playerId).emit('autoDice', playerOnTurn.playerId);
+                        RollTheDice();
+                        if(playersInGame[n].onGame ==false)
+                        {
+                               console.log("player "+playersInGame[n].playerId+" i outside");
+                               io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                        }
+                   }
+            }
         }
     });
+    
+    function RollTheDice(){
+        
+       var randNum = Math.floor(Math.random() * 6);
+        console.log('dice number: '+randNum);
+    }
     socket.on('diceRoll', (data) => {
         //var player = players.getPlayer(socket.id);        
    //     var game = games.getGame(player.hostId); //Gets the game data
      //   var playersInGame = players.getPlayers(player.hostId);
-    //    var randNum = Math.floor(Math.random() * 6);
+       var randNum = Math.floor(Math.random() * 6);
         console.log('dice number: '+randNum);
         //    for(var n = 0; n < playersInGame.length; n++)
           //  {
