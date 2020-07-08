@@ -228,6 +228,7 @@ io.on('connection', (socket) => {
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
+                       console.log(playersInGame[n].playerId);
                         io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
                         if(playersInGame[n].onGame ==false)
                         {
