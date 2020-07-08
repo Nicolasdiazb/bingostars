@@ -249,7 +249,7 @@ io.on('connection', (socket) => {
         //                       console.log("player "+playersInGame[n].playerId+" i outside");
             //                   io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
           //              }
-                   }     
+       //            }     
     //        console.log('murio al final');                   
                // clearInterval(game.intervalIdCB);
     //}
