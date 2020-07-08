@@ -212,7 +212,8 @@ io.on('connection', (socket) => {
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data
         var playersInGame = players.getPlayers(player.hostId);
-        var iterations = 0
+        var iterations = 0;
+         var playerOnTurn;
         ///    for(var n = 0; n < playersInGame.length; n++)
         //    {
         //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
@@ -223,7 +224,7 @@ io.on('connection', (socket) => {
         function SetBallot() {
             iterations++;
             if(iterations<2){
-                   var playerOnTurn = players.getPlayerByTurn(game.currTurn);
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn);
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
@@ -241,10 +242,11 @@ io.on('connection', (socket) => {
             }
             else{
                    clearInterval(game.intervalIdCB);
+                        var randNum = Math.floor(Math.random() * 6);
+                        io.to(playerOnTurn.playerId).emit('moveToSection', randNum);
                    for(var n = 0; n < playersInGame.length; n++)
-                   {
-                        io.to(playersInGame[n].playerId).emit('autoDice', playerOnTurn.playerId);
-                        RollTheDice();
+                   {                       
+                        io.to(playersInGame[n].playerId).emit('autoDice', randNum);
                         if(playersInGame[n].onGame ==false)
                         {
                                console.log("player "+playersInGame[n].playerId+" i outside");
@@ -255,12 +257,7 @@ io.on('connection', (socket) => {
         }
     });
     
-    function RollTheDice(){
-        
-       var randNum = Math.floor(Math.random() * 6);
-        console.log('dice number: '+randNum);
-    }
-    socket.on('diceRoll', (data) => {
+    socket.on('diceRoll', (params) => {
         //var player = players.getPlayer(socket.id);        
    //     var game = games.getGame(player.hostId); //Gets the game data
      //   var playersInGame = players.getPlayers(player.hostId);
