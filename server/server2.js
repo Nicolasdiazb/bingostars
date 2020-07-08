@@ -220,7 +220,7 @@ io.on('connection', (socket) => {
             io.to(playerOnTurn.playerId).emit('playerTurn', params);//
             for(var n = 0; n < playersInGame.length; n++)
             {
-              console.log(playersInGame[n].pos+' currTurn: '+game.currTurn);
+                io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId);/
             }
               game.currTurn++;
                if(game.currTurn>=playersInGame.length){
