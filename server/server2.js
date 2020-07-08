@@ -27,6 +27,7 @@ app.use(express.static(publicPath));
 //Starting server on port 3000
 server.listen(3000, () => {
     console.log("Server started on port 3000");
+    socket.emit('diceRoll',0);
 });
 
 //When a connection to server is made from client
@@ -233,6 +234,17 @@ io.on('connection', (socket) => {
                     game.currTurn = 0;
                }
         }
+    });
+    socket.on('diceRoll', (params) => {
+        var player = players.getPlayer(socket.id);        
+        var game = games.getGame(player.hostId); //Gets the game data
+        var playersInGame = players.getPlayers(player.hostId);
+        var randNum = Math.floor(Math.random() * 6);
+        console.log('dice number: '+randNum);
+        //    for(var n = 0; n < playersInGame.length; n++)
+          //  {
+            //    io.to(playersInGame[n].playerId).emit('diceRoll', params);//Sending players a ballot                                     
+            //}        
     });
     socket.on('player-attempt-to-win', (params) => {
         var gameFound = false; //If a game is found with pin provided by player
