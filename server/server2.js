@@ -215,7 +215,7 @@ io.on('connection', (socket) => {
         game.intervalIdCB = intervalID;
         
         function SetBallot() {
-            console.log('new cicle');
+            console.log('new cicle '+playersInGame.length);
             for(var n = 0; n < playersInGame.length; n++)
             {
               console.log(playersInGame[n].pos);                                     
