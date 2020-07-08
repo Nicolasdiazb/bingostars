@@ -250,9 +250,9 @@ io.on('connection', (socket) => {
             //                   io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
           //              }
                    }     
-            console.log('murio al final');                   
+    //        console.log('murio al final');                   
                // clearInterval(game.intervalIdCB);
-            }
+    //}
         }
     });
     
