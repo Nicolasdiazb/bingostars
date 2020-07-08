@@ -235,11 +235,11 @@ io.on('connection', (socket) => {
                }
         }
     });
-    socket.on('diceRoll', (params) => {
-        var player = players.getPlayer(socket.id);        
-        var game = games.getGame(player.hostId); //Gets the game data
-        var playersInGame = players.getPlayers(player.hostId);
-        var randNum = Math.floor(Math.random() * 6);
+    socket.on('diceRoll', (data) => {
+        //var player = players.getPlayer(socket.id);        
+   //     var game = games.getGame(player.hostId); //Gets the game data
+     //   var playersInGame = players.getPlayers(player.hostId);
+    //    var randNum = Math.floor(Math.random() * 6);
         console.log('dice number: '+randNum);
         //    for(var n = 0; n < playersInGame.length; n++)
           //  {
