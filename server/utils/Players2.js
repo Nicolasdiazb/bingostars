@@ -19,6 +19,9 @@ class Players {
     getPlayer(playerId){
         return this.players.filter((player) => player.playerId === playerId)[0]
     }
+    getPlayerByTurn(playerTurn){
+        return this.players.filter((player) => player.pos === playerTurn)[0]
+    }
     updatePlayerId(newPlayerId, _playerId){
         var playerToChange = this.players.filter((player) => player.playerId === _playerId)[0];
         playerToChange.playerId = newPlayerId; 
