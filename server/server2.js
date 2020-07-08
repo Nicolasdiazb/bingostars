@@ -211,7 +211,7 @@ io.on('connection', (socket) => {
         var iterations = 0;
          var playerOnTurn; 
         if(typeof game.intervalIdCB === 'undefined'){         
-            console.log('murio al principio');
+            console.log('murio al principio '+game.intervalIdCB);
             clearInterval(game.intervalIdCB);
         }
         ///    for(var n = 0; n < playersInGame.length; n++)
