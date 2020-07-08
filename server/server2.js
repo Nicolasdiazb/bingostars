@@ -222,8 +222,6 @@ io.on('connection', (socket) => {
         game.intervalIdCB = intervalID;
         
         function SetBallot() {
-            iterations++;
-            if(iterations<2){
                    playerOnTurn = players.getPlayerByTurn(game.currTurn);
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
@@ -240,18 +238,17 @@ io.on('connection', (socket) => {
                    if(game.currTurn>=playersInGame.length){
                    game.currTurn = 0;
                    }
-            }
-            else{
-                        var randNum = Math.floor(Math.random() * 6);
-                        io.to(playerOnTurn.playerId).emit('moveToSection', randNum);
-                   for(var n = 0; n < playersInGame.length; n++)
-                   {                       
-                        io.to(playersInGame[n].playerId).emit('autoDice', randNum);
-                        if(playersInGame[n].onGame ==false)
-                        {
-                               console.log("player "+playersInGame[n].playerId+" i outside");
-                               io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                        }
+ //           else{
+ //                       var randNum = Math.floor(Math.random() * 6);
+ //                       io.to(playerOnTurn.playerId).emit('moveToSection', randNum);
+  //                 for(var n = 0; n < playersInGame.length; n++)
+   //                {                       
+  //                      io.to(playersInGame[n].playerId).emit('autoDice', randNum);
+      //                  if(playersInGame[n].onGame ==false)
+    //                    {
+        //                       console.log("player "+playersInGame[n].playerId+" i outside");
+            //                   io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+          //              }
                    }     
             console.log('murio al final');                   
                // clearInterval(game.intervalIdCB);
