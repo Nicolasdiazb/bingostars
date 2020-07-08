@@ -205,14 +205,14 @@ io.on('connection', (socket) => {
             }
     });
     socket.on('newTurn', (params) => {
-        if(typeof game.intervalIdCB === 'undefined'){            
-            clearInterval(game.intervalIdCB);
-        }
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data
         var playersInGame = players.getPlayers(player.hostId);
         var iterations = 0;
-         var playerOnTurn;
+         var playerOnTurn; 
+        if(typeof game.intervalIdCB === 'undefined'){            
+            clearInterval(game.intervalIdCB);
+        }
         ///    for(var n = 0; n < playersInGame.length; n++)
         //    {
         //        io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
