@@ -218,7 +218,6 @@ io.on('connection', (socket) => {
         function SetBallot() {
             var playerOnTurn = players.getPlayerByTurn(game.currTurn);
             console.log('new cicle '+playersInGame.length);
-            io.to(playerOnTurn.playerId).emit('playerTurn', params);//
             for(var n = 0; n < playersInGame.length; n++)
             {
                 io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
