@@ -215,12 +215,14 @@ io.on('connection', (socket) => {
         game.intervalIdCB = intervalID;
         
         function SetBallot() {
+            var playerOnTurn = Players.getPlayerByTurn(game.currTurn);
             console.log('new cicle '+playersInGame.length);
+            io.to(playerOnTurn.playerId).emit('playerTurn', params);//
             for(var n = 0; n < playersInGame.length; n++)
             {
               console.log(playersInGame[n].pos+' currTurn: '+game.currTurn);
             }
-              game.currPosToInit++;
+              game.currTurn++;
                if(game.currTurn>=playersInGame.length){
                     game.currTurn = 0;
                }
