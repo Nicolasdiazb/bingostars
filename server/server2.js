@@ -212,7 +212,7 @@ io.on('connection', (socket) => {
          var playerOnTurn; 
         if(typeof game.intervalIdCB === 'undefined'){         
             console.log('murio al principio '+game.intervalIdCB);
-            clearInterval(game.intervalIdCB);
+          //  clearInterval(game.intervalIdCB);
         }
         ///    for(var n = 0; n < playersInGame.length; n++)
         //    {
@@ -254,7 +254,7 @@ io.on('connection', (socket) => {
                         }
                    }     
             console.log('murio al final');                   
-                clearInterval(game.intervalIdCB);
+               // clearInterval(game.intervalIdCB);
             }
         }
     });
