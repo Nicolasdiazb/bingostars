@@ -205,7 +205,7 @@ io.on('connection', (socket) => {
             }
     });
     socket.on('newTurn', (params) => {
-        if(typeof game.intervalIdCB !== "undefined"&&game.intervalIdCB){            
+        if(game.intervalIdCB){            
             clearInterval(game.intervalIdCB);
         }
         var player = players.getPlayer(socket.id);        
