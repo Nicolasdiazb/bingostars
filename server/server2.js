@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
     });
     //When player connects for the first time
     socket.on('player-host-join', (params) => {
-        
+        console.log('entro host');
         //For each game in the Games class
         for(var i = 0; i < games.games.length; i++){
             //If the pin is equal to one of the game's pin
