@@ -221,7 +221,13 @@ io.on('connection', (socket) => {
             io.to(playerOnTurn.playerId).emit('playerTurn', params);//
             for(var n = 0; n < playersInGame.length; n++)
             {
-                io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId);
+                io.to(playersInGame[n].playerId).emit('playerTurn', playerOnTurn.playerId); 
+                if(playersInGame[n].onGame ==false)
+                {
+                        console.log("player "+playersInGame[n].playerId+" i outside");
+                        io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
+                                    //io.to(playersInGame[n].playerId).emit('refreshBallots', games.games[gamePos].activeBallots);//Sending player all ballots 
+                }
             }
               game.currTurn++;
                if(game.currTurn>=playersInGame.length){
