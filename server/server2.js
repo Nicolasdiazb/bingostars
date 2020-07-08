@@ -218,7 +218,11 @@ io.on('connection', (socket) => {
             console.log('new cicle '+playersInGame.length);
             for(var n = 0; n < playersInGame.length; n++)
             {
-              console.log(playersInGame[n].pos);                                     
+              console.log(playersInGame[n].pos+' currTurn: '+game.currPosToInit);
+              game.currPosToInit++;
+               if(game.currPosToInit>playersInGame.length){
+                    game.currPosToInit = 0;
+               }
             }
         }
     });
