@@ -222,7 +222,7 @@ io.on('connection', (socket) => {
         game.intervalIdCB = intervalID;
         
         function SetBallot() {
-                   playerOnTurn = players.getPlayerByTurn(game.currTurn);
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
