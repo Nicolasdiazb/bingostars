@@ -175,6 +175,7 @@ io.on('connection', (socket) => {
         var playersInGame;
         var paramsPin;
         var noBallotsLeft = new Boolean(false);
+        console.log('entra bingo');
         //players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
         //For each game in the Games class
         for(var i = 0; i < games.games.length; i++){
