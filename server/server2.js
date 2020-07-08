@@ -210,7 +210,8 @@ io.on('connection', (socket) => {
         var playersInGame = players.getPlayers(player.hostId);
         var iterations = 0;
          var playerOnTurn; 
-        if(typeof game.intervalIdCB === 'undefined'){            
+        if(typeof game.intervalIdCB === 'undefined'){         
+            console.log('murio al principio');
             clearInterval(game.intervalIdCB);
         }
         ///    for(var n = 0; n < playersInGame.length; n++)
@@ -240,7 +241,6 @@ io.on('connection', (socket) => {
                    }
             }
             else{
-                   clearInterval(game.intervalIdCB);
                         var randNum = Math.floor(Math.random() * 6);
                         io.to(playerOnTurn.playerId).emit('moveToSection', randNum);
                    for(var n = 0; n < playersInGame.length; n++)
@@ -251,7 +251,9 @@ io.on('connection', (socket) => {
                                console.log("player "+playersInGame[n].playerId+" i outside");
                                io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                         }
-                   }
+                   }     
+            console.log('murio al final');                   
+                clearInterval(game.intervalIdCB);
             }
         }
     });
