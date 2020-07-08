@@ -219,11 +219,11 @@ io.on('connection', (socket) => {
             for(var n = 0; n < playersInGame.length; n++)
             {
               console.log(playersInGame[n].pos+' currTurn: '+game.currPosToInit);
+            }
               game.currPosToInit++;
                if(game.currPosToInit>playersInGame.length){
                     game.currPosToInit = 0;
                }
-            }
         }
     });
     socket.on('player-attempt-to-win', (params) => {
