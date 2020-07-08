@@ -8,11 +8,12 @@ class LiveGames {
         var active = 1;
         var intervalIdCB;
         var currPosToInit = 0;
+        var currTurn = 0;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit,currTurn};
         this.games.push(game);
         return game;
     }
