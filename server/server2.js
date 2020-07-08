@@ -27,7 +27,6 @@ app.use(express.static(publicPath));
 //Starting server on port 3000
 server.listen(3000, () => {
     console.log("Server started on port 3000");
-    io.emit('diceRoll',0);
 });
 
 //When a connection to server is made from client
@@ -35,6 +34,7 @@ io.on('connection', (socket) => {
     
     console.log("Connection " + socket.id);
         io.emit('hola');
+        io.emit('diceRoll',0);
         io.to(socket.id).emit('conn', 0);
     //When host connects for the first time
     socket.on('host-join', (data) =>{
