@@ -3,8 +3,9 @@ class Players {
         this.players = [];
     }
     addPlayer(hostId, playerId, nameId, profilePic, pos){
+        var diceNumber = 0;
         var onGame = new Boolean(false);
-        var player = {hostId, playerId, nameId, profilePic, onGame, pos};
+        var player = {hostId, playerId, nameId, profilePic, onGame, pos,diceNumber};
         this.players.push(player);
         return player;
     }
