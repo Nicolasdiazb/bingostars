@@ -233,7 +233,7 @@ io.on('connection', (socket) => {
             iterations++;
             if(iterations<2){
                 console.log('currturn: '+game.currturn)
-                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);
+                         playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
@@ -257,7 +257,7 @@ io.on('connection', (socket) => {
                             playerOnTurn.diceNumber = randNum;
                         io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
                           io.to(playersInGame[n].playerId).emit('autoDice', randNum);                            
-                            playerOnTurn.pos = playerOnTurn.pos + randNum;
+                            playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
                           if(playersInGame[n].onGame ==false)
                           {
                                  console.log("player "+playersInGame[n].playerId+" i outside");
