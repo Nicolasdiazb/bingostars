@@ -253,19 +253,19 @@ io.on('connection', (socket) => {
                    else{
                        console.log('dice rolled for: '+playerOnTurn.nameId);
                         var randNum = Math.floor(Math.random() * 6);
+                            playerOnTurn.diceNumber = randNum;
                         for(var n = 0; n < playersInGame.length; n++)
                         {                       
-                            playerOnTurn.diceNumber = randNum;
                             console.log('posicion actual: '+playerOnTurn.posOnBoard+'dado: '+playerOnTurn.diceNumber);
-                        io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
-                          io.to(playersInGame[n].playerId).emit('autoDice', randNum);                            
-                            playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
-                          if(playersInGame[n].onGame ==false)
-                          {
-                                 console.log("player "+playersInGame[n].playerId+" i outside");
+                             io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+                               io.to(playersInGame[n].playerId).emit('autoDice', randNum);     
+                               if(playersInGame[n].onGame ==false)
+                               {
+                                  console.log("player "+playersInGame[n].playerId+" i outside");
                                  io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
-                          }
-                     }     
+                               }
+                        }                            
+                            playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
               console.log('murio al final');                   
               clearInterval(game.intervalIdCB);
                  }
