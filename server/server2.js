@@ -232,7 +232,7 @@ io.on('connection', (socket) => {
         function SetBallot() {
             iterations++;
             if(iterations<2){
-                   playerOnTurn = plyers.getPlayerByTurn(game.currTurn,player.hostId);                       
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
                 console.log('Turn Setted for: '+playerOnTurn.nameId);
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
