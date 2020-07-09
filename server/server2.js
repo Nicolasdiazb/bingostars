@@ -232,8 +232,8 @@ io.on('connection', (socket) => {
         function SetBallot() {
             iterations++;
             if(iterations<2){
-                console.log('currturn: '+game.currturn)
-                         playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
+                   playerOnTurn = plyers.getPlayerByTurn(game.currTurn,player.hostId);                       
+                console.log('Turn Setted for: '+playerOnTurn.nameId);
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
@@ -251,6 +251,7 @@ io.on('connection', (socket) => {
                    }
             }
                    else{
+                       console.log('dice rolled for: '+playerOnTurn.nameId);
                         var randNum = Math.floor(Math.random() * 6);
                         for(var n = 0; n < playersInGame.length; n++)
                         {                       
