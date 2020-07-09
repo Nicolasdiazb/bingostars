@@ -251,10 +251,12 @@ io.on('connection', (socket) => {
             }
                    else{
                         var randNum = Math.floor(Math.random() * 6);
-                        io.to(playerOnTurn.playerId).emit('moveToSection', randNum);
                         for(var n = 0; n < playersInGame.length; n++)
                         {                       
-                          io.to(playersInGame[n].playerId).emit('autoDice', randNum);
+                            playerOnTurn.diceNumber = randNum;
+                        io.to(playersInGame[n].playerId).emit('moveToSection', playerOnTurn);
+                          io.to(playersInGame[n].playerId).emit('autoDice', randNum);                            
+                            playerOnTurn.pos = playerOnTurn.pos + randNum;
                           if(playersInGame[n].onGame ==false)
                           {
                                  console.log("player "+playersInGame[n].playerId+" i outside");
