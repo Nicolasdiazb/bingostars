@@ -207,7 +207,7 @@ io.on('connection', (socket) => {
     socket.on('clearInterval', (params) => {
       var player = players.getPlayer(socket.id);        
       var game = games.getGame(player.hostId); //Gets the game data
-            clearInterval(game.intervalIdCB);v
+            clearInterval(game.intervalIdCB);
      //   var playersInGame = players.getPlayers(player.hostId);
        var randNum = Math.floor(Math.random() * 6);
         console.log('interval has been cleared: ');
