@@ -194,7 +194,7 @@ io.on('connection', (socket) => {
         if(gameFound){
                         
             // Will execute myCallback every 5 seconds 
-            var intervalID = setInterval(SetBallot, 9000);
+            var intervalID = setInterval(SetBallot, 7500);
             games.games[gamePos].intervalIdCB = intervalID;
             
             function SetBallot() {
