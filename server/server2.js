@@ -204,6 +204,18 @@ io.on('connection', (socket) => {
                 io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
             }
     });
+    socket.on('clearInterval', (params) => {
+      var player = players.getPlayer(socket.id);        
+      var game = games.getGame(player.hostId); //Gets the game data
+            clearInterval(game.intervalIdCB);v
+     //   var playersInGame = players.getPlayers(player.hostId);
+       var randNum = Math.floor(Math.random() * 6);
+        console.log('interval has been cleared: ');
+        //    for(var n = 0; n < playersInGame.length; n++)
+          //  {
+            //    io.to(playersInGame[n].playerId).emit('diceRoll', params);//Sending players a ballot                                     
+            //}        
+    });
     socket.on('newTurn', (params) => {
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data
