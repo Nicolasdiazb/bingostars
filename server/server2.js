@@ -213,6 +213,7 @@ io.on('connection', (socket) => {
      var playersInGame = players.getPlayers(player.hostId);
         console.log('interval has been cleared: ');
          console.log('dice rolled for: '+playerOnTurn.nameId);
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);   
                         var randNum = Math.floor(Math.random() * 6);
                             playerOnTurn.diceNumber = randNum;
                         for(var n = 0; n < playersInGame.length; n++)
