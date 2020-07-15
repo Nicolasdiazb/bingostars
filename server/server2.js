@@ -216,7 +216,7 @@ io.on('connection', (socket) => {
          console.log('dice rolled for: '+playerOnTurn.nameId); 
                         var randNum = 0;
                         while(randNum==0){                            
-                        var randNum = Math.floor(Math.random() * 12);
+                        randNum = Math.floor(Math.random() * 8);
                             
                         }
                             playerOnTurn.diceNumber = randNum;
@@ -290,7 +290,11 @@ io.on('connection', (socket) => {
                    game.currTurn = 0;
                    }
                        console.log('dice rolled for: '+playerOnTurn.nameId);
-                        var randNum = Math.floor(Math.random() * 6);
+                        var randNum = 0;
+                        while(randNum==0){                            
+                        randNum = Math.floor(Math.random() * 8);
+                            
+                        }
                             playerOnTurn.diceNumber = randNum;
                         for(var n = 0; n < playersInGame.length; n++)
                         {                       
