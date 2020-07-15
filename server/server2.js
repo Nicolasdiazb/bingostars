@@ -209,7 +209,7 @@ io.on('connection', (socket) => {
         var iterations = 0;
          var playerOnTurn;    
       var game = games.getGame(player.hostId); //Gets the game data
-                   playerOnTurn = players.getPlayerByTurn(game.currTurn--,player.hostId);  
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);  
             clearInterval(game.intervalIdCB);
      var playersInGame = players.getPlayers(player.hostId);
         console.log('interval has been cleared: ');
@@ -275,12 +275,12 @@ io.on('connection', (socket) => {
                                io.to(playersInGame[n].playerId).emit('gameStarted', playersInGame);
                         }
                    }
+            }
+                   else{
                    game.currTurn++;
                    if(game.currTurn>=playersInGame.length){
                    game.currTurn = 0;
                    }
-            }
-                   else{
                        console.log('dice rolled for: '+playerOnTurn.nameId);
                         var randNum = Math.floor(Math.random() * 6);
                             playerOnTurn.diceNumber = randNum;
