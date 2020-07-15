@@ -229,6 +229,10 @@ io.on('connection', (socket) => {
                         }                            
                             playerOnTurn.posOnBoard = playerOnTurn.posOnBoard + randNum;
               console.log('murio al final');
+                   game.currTurn++;
+                   if(game.currTurn>=playersInGame.length){
+                   game.currTurn = 0;
+                   }
         //    for(var n = 0; n < playersInGame.length; n++)
           //  {
             //    io.to(playersInGame[n].playerId).emit('diceRoll', params);//Sending players a ballot                                     
