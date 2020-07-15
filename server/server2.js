@@ -209,7 +209,7 @@ io.on('connection', (socket) => {
         var iterations = 0;
          var playerOnTurn;    
       var game = games.getGame(player.hostId); //Gets the game data
-                   playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);  
+                   playerOnTurn = players.getPlayerByTurn(game.currTurn--,player.hostId);  
             clearInterval(game.intervalIdCB);
      var playersInGame = players.getPlayers(player.hostId);
         console.log('interval has been cleared: ');
