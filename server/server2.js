@@ -101,7 +101,7 @@ io.on('connection', (socket) => {
             var game = games.getGame(player.hostId); //Gets the game data
             var playersInGame = players.getPlayers(player.hostId);
              for(var n = 0; n < playersInGame.length; n++){
-                    io.to(playersInGame[n].playerId).emit('minigamedice', sockets);//Sending players old and new sockets                                     
+                    io.to(playersInGame[n].playerId).emit('minigamedice', 1);//Sending players old and new sockets                                     
              }
     });
     socket.on('updatePlayerSocketId', (params) => {
