@@ -96,6 +96,13 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('conn');
         console.log("enviado");
     });
+    socket.on('minigameDice', (params) => {
+        var player = players.getPlayer(socket.id);
+            var game = games.getGame(player.hostId); //Gets the game data
+             for(var n = 0; n < playersInGame.length; n++){
+                    io.to(playersInGame[n].playerId).emit('minigamedice', player.playerId);//Sending players old and new sockets                                     
+             }
+    });
     socket.on('updatePlayerSocketId', (params) => {
         var player = players.getPlayer(params.oldId);
         if(player)
