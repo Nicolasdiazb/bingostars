@@ -204,6 +204,11 @@ io.on('connection', (socket) => {
                 io.to(playersInGame[n].playerId).emit('emojiReceived', params);//Sending players a ballot                                     
             }
     });
+    socket.on('clear', (params) => {
+        var player = players.getPlayer(socket.id);        
+        var game = games.getGame(player.hostId); //Gets the game data        
+            clearInterval(game.intervalIdCB);
+    });
     socket.on('clearInterval', (params) => {
       var player = players.getPlayer(socket.id);     
         var iterations = 0;
