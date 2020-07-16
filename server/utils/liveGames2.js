@@ -9,7 +9,7 @@ class LiveGames {
         var intervalIdCB;
         var currPosToInit = 0;
         var currTurn = 0;
-        var onTurn = 0;
+        var onTurn = 1;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
