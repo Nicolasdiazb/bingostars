@@ -9,11 +9,12 @@ class LiveGames {
         var intervalIdCB;
         var currPosToInit = 0;
         var currTurn = 0;
+        var onTurn = 0;
         for (var i = 0; i < boardLenght; i++) 
         {
             activeBallots[i] = 0;
         }
-        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit,currTurn};
+        var game = {pin, hostId, boardLenght, activeBallots, ballots, intervalIdCB,currPosToInit,currTurn,onTurn};
         this.games.push(game);
         return game;
     }
