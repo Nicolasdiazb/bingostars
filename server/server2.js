@@ -244,7 +244,9 @@ io.on('connection', (socket) => {
     });
     socket.on('newTurn', (params) => {
         var player = players.getPlayer(socket.id);        
-        var game = games.getGame(player.hostId); //Gets the game data
+        var game = games.getGame(player.hostId); //Gets the game data        
+        if(game.onTurn ==1){
+            game.onTurn = 0;
         var playersInGame = players.getPlayers(player.hostId);
         var iterations = 0;
          var playerOnTurn; 
@@ -272,6 +274,7 @@ io.on('connection', (socket) => {
             if(iterations<2){
                    playerOnTurn = players.getPlayerByTurn(game.currTurn,player.hostId);                       
                 console.log('Turn Setted for: '+playerOnTurn.nameId);
+                game.onTurn =1;
                    console.log('new cicle '+playersInGame.length);
                    for(var n = 0; n < playersInGame.length; n++)
                    {
@@ -311,6 +314,7 @@ io.on('connection', (socket) => {
               console.log('murio al final');                   
               clearInterval(game.intervalIdCB);
                  }
+        }
         }
     });
     
