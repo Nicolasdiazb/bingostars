@@ -218,6 +218,7 @@ io.on('connection', (socket) => {
             clearInterval(game.intervalIdCB);
     });
     socket.on('endminigame', (params) => {
+        console.log("ending minigame");
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data        
         game.onTurn = 1;
