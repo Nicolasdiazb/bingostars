@@ -117,7 +117,8 @@ io.on('connection', (socket) => {
     });
     //When the host connects from the game view
     socket.on('test', (data) => {
-        console.log("test");
+        console.log("oprimio w");
+         io.to(socket.id).emit('w', 0);//Sending player all ballots 
     });
     //When player connects for the first time
     socket.on('player-join', (params) => {
