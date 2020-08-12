@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
          io.to(socket.id).emit('resetp', 0);//Sending player all ballots 
     });
     socket.on('kick', (data) => {
-        console.log("el jugador realizo un golpe- sin exito + salud: 100 + energia: 100 + arma: fierrote+1");
+      //  console.log("el jugador realizo un golpe- sin exito + salud: 100 + energia: 100 + arma: fierrote+1");
          io.to(socket.id).emit('bad', 0);//Sending player all ballots 
     });
     //When player connects for the first time
