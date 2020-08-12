@@ -120,6 +120,14 @@ io.on('connection', (socket) => {
         console.log("oprimio w");
          io.to(socket.id).emit('w', 0);//Sending player all ballots 
     });
+    socket.on('reset', (data) => {
+        console.log("el jugador no esta en linea, se sincronizo la posicion");
+         io.to(socket.id).emit('resetp', 0);//Sending player all ballots 
+    });
+    socket.on('kick', (data) => {
+        console.log("el jugador reall un golpe");
+         io.to(socket.id).emit('bad', 0);//Sending player all ballots 
+    });
     //When player connects for the first time
     socket.on('player-join', (params) => {
         console.log('entra '+params.nameID +' '+params+' '+params.pin);
