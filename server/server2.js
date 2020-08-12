@@ -119,6 +119,19 @@ io.on('connection', (socket) => {
             console.log("player cambio su Id de: "+params.oldId+" a: "+ socket.id); 
         }
     });
+    //When the host connects from the game view
+    socket.on('test', (data) => {
+        console.log("oprimio w");
+         io.to(socket.id).emit('w', 0);//Sending player all ballots 
+    });
+    socket.on('reset', (data) => {
+        console.log("el jugador no esta en linea, se sincronizo la posicion");
+         io.to(socket.id).emit('resetp', 0);//Sending player all ballots 
+    });
+    socket.on('kick', (data) => {
+      //  console.log("el jugador realizo un golpe- sin exito + salud: 100 + energia: 100 + arma: fierrote+1");
+         io.to(socket.id).emit('bad', 0);//Sending player all ballots 
+    });
     socket.on('refreshingRequest', (params) => {
         var player = players.getPlayer(socket.id);
             var game = games.getGame(player.hostId); //Gets the game data
