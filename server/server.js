@@ -175,6 +175,10 @@ io.on('connection', (socket) => {
             player.onGame = true;
         }
     });
+
+    socket.on('share-game',(data)=>{
+        socket.emit('share-game',Players.sharePlayers(data))
+    })
     
     socket.on('host-start-bingo-game', (params) => {   
         var gameFound = false; //If a game is found with pin provided by player

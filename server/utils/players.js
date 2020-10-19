@@ -1,3 +1,5 @@
+const vanillaSharing = require("vanilla-sharing")
+
 class Players {
     constructor () {
         this.players = [];
@@ -26,6 +28,38 @@ class Players {
     getPlayers(hostId){
         return this.players.filter((player) => player.hostId === hostId);
     }
+    sharePlayers(data){
+        var type = data.type;
+        var title = `Únete a una partida rápida usando el codigo ${data.code} o dando click al siguiente vinculo. Bingo Legends, es muy entretenido.`;
+        var link = data.url+'/'+data.code
+        var url;
+        switch (type) {
+            case 'whatsapp':
+                url = vanillaSharing.getWhatsappUrl({
+                    title: title,
+                    url: link
+                });
+            break;
+            case 'messenger':
+                url = vanillaSharing.messenger({
+                    url: `${title} ${link}`,
+                    fbAppId: 'string',
+                })
+            break;
+            case 'twitter':
+                url = vanillaSharing.getTwUrl({
+                    url: link,
+                    title: title,
+                    hashtags: ['BingoLegends'],
+                })
+            break;
+            default:
+                url = null
+            break;
+        }
+        return url;
+    }
+       
 }
 
 module.exports = {Players};
