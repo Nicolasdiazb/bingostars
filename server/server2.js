@@ -209,6 +209,7 @@ io.on('connection', (socket) => {
                 paramsPin = params.pin;
                 playersInGame = players.getPlayers(hostId); 
                 io.to(params.pin).emit('gameStarted', playersInGame);//Sending players data to display
+                io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                 //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
                 gameFound = true; //Game has been found
             }
