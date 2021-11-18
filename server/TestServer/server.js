@@ -243,6 +243,31 @@ io.on('connection', (socket) => {
         var game = games.getGame(player.hostId); //Gets the game data        
         game.onTurn = 1;
     });
+    
+    
+    
+    socket.on('player-reached-end-of-the-Game', (params) => {
+        console.log("ending minigame");
+        var player = players.getPlayer(socket.id);        
+        var game = games.getGame(player.hostId); //Gets the game data       
+        var gamePos;
+        var hostId;
+        var playersInGame;
+        var paramsPin;
+        
+                hostId = games.games[i].hostId; //Get the id of host of game
+                paramsPin = params.pin;
+                playersInGame = players.getPlayers(hostId); 
+                for(var n = 0; n < playersInGame.length; n++)
+                {
+                    
+                io.to(playersInGame[n].playerId).emit('game-is-over', socket.id);//Sending players data to display                            
+                }
+        
+                io.to(socket.id).emit('game-is-over-win', playersInGame);//Sending players data to display
+    });
+    
+    
     socket.on('clearInterval', (params) => {
       var player = players.getPlayer(socket.id);     
         var iterations = 0;
