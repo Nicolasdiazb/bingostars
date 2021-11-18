@@ -248,30 +248,40 @@ io.on('connection', (socket) => {
     
     socket.on('player-reached-end-of-the-Game', (params) => {
         console.log("ending of the hole game");
-        var player = players.getPlayer(socket.id);        
-        var game = games.getGame(player.hostId); //Gets the game data       
+        
+        
+         var gameFound = false; //If a game is found with pin provided by player
         var gamePos;
         var hostId;
         var playersInGame;
         var paramsPin;
+        var noBallotsLeft = new Boolean(false);
+        //players.addPlayer(socket.id, socket.id, params.nameID); //add player to game
         //For each game in the Games class
         for(var i = 0; i < games.games.length; i++){
             //If the pin is equal to one of the game's pin
             if(params.pin == games.games[i].pin){
+                gamePos = i;
+                console.log('paso params pin');
+                
                 hostId = games.games[i].hostId; //Get the id of host of game
                 paramsPin = params.pin;
                 playersInGame = players.getPlayers(hostId); 
+                io.to(params.pin).emit('gameStarted', playersInGame);//Sending players data to display
+                io.to(params.pin).emit('activate-board', params.currLevel);//Sending players data to display
                 for(var n = 0; n < playersInGame.length; n++)
                 {
                     console.log("sending end");
-                io.to(playersInGame[n].playerId).emit('game-is-over', socket.id);//Sending players data to display                            
+                io.to(playersInGame[n].playerId).emit('game-is-over', socket.id);//Sending players data to display                                    
                 }
-        
+                //io.to(hostId).emit('updateLobby', playersInGame);//Sending host player data to display
                 io.to(socket.id).emit('game-is-over-win', playersInGame);//Sending players data to display
-                
             }
             
-        }
+        }       
+        
+        
+       
     });
     
     
