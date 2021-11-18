@@ -247,7 +247,7 @@ io.on('connection', (socket) => {
     
     
     socket.on('player-reached-end-of-the-Game', (params) => {
-        console.log("ending minigame");
+        console.log("ending of the hole game");
         var player = players.getPlayer(socket.id);        
         var game = games.getGame(player.hostId); //Gets the game data       
         var gamePos;
@@ -263,7 +263,7 @@ io.on('connection', (socket) => {
                 playersInGame = players.getPlayers(hostId); 
                 for(var n = 0; n < playersInGame.length; n++)
                 {
-                    
+                    console.log("sending end");
                 io.to(playersInGame[n].playerId).emit('game-is-over', socket.id);//Sending players data to display                            
                 }
         
